@@ -1,0 +1,15 @@
+---
+- name: Install Prometheus Varnish Exporter
+  hosts: all
+  gather_facts: yes
+  vars:
+    package: prometheus-varnish-exporter-0.1-1.x86_64.rpm
+  tasks:
+  - name: Copy the RPM package to the remote system
+    copy:
+      src: "{{ package }}"
+      dest: /tmp/
+  - name: Install the RPM package
+    yum:
+      name: "/tmp/{{ package }}"
+      state: present
